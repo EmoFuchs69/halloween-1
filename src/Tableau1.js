@@ -6,7 +6,7 @@ class Tableau1 extends Phaser.Scene{
     /**
      * Précharge les assets
      */
-    preload() {
+    preload(){
         //bg 2 (tout au fond et très flou)
         this.load.image('bg2-terrain-2', 'assets/level/background-2/bg2-terrain-2.png');
         this.load.image('bg2-tree-2', 'assets/level/background-2/bg2-tree-2.png');
@@ -22,6 +22,7 @@ class Tableau1 extends Phaser.Scene{
         this.load.image('bg1-tree-2', 'assets/level/background-1/bg-tree-2.png');
         this.load.image('bg1-stone-1', 'assets/level/background-1/bg-stone-1.png');
         this.load.image('bg1-terrain-4', 'assets/level/background-1/bg-terrain-4.png');
+
 
 
         //ground (premier plan noir)
@@ -51,29 +52,40 @@ class Tableau1 extends Phaser.Scene{
         this.load.image('gvineb', 'assets/level/ground/g-vine-b.png');
         this.load.image('gvinec', 'assets/level/ground/g-vine-c.png');
 
-        for (let i = 1; i <= 3; i++) {
-            this.load.image('weather' + i, 'assets/level/weather/rain/frame' + i + '.png');
+        for(let i=1;i<=3;i++) {
+            this.load.image('weather'+i, 'assets/level/weather/rain/frame'+i+'.png');
         }
 
 
         //au lieu d'écrire 5 lignes quasi identiques, on charge l'herbe avec une boucle
         // ALGO : ceci est une boucle
-        for (let i = 1; i <= 5; i++) {
-            this.load.image('g-grass-' + i, 'assets/level/ground/g-grass-' + i + '.png');
+        for(let i=1;i<=5;i++){
+            this.load.image('g-grass-'+i, 'assets/level/ground/g-grass-'+i+'.png');
         }
 
+        for(let i=1;i<=7;i++){
+            this.load.image('layer'+i, 'assets/boy5/climb/layer'+i+'.png');
+        }
         //filtre film TODO élève : faire une boucle à la place des 3 lignes qui suivent
-        for (let i = 1; i <= 3; i++) {
-            this.load.image('filterFilm' + i, 'assets/level/filters/film/frame-' + i + '.png');
+        for(let i=1;i<=3;i++) {
+            this.load.image('filterFilm'+i, 'assets/level/filters/film/frame-'+i+'.png');
         }
 
-        for (let i = 1; i <= 9; i++) {
-            this.load.image('B' + i, 'assets/characters/boy/boy_style_5/PNG/die/Layer-' + i + '.png');
-        }
         //texture au fond  TODO élève : faire une boucle pour charger les 3 images et démontrer par la même que vous savez aller au plus simple
+        for(let i=1;i<=3;i++) {
+            this.load.image('bg-animation'+i, 'assets/level/background-2/bg-animation/bg-animation-'+i+'.png');
+        }
 
-        for (let i = 1; i <= 3; i++) {
-            this.load.image('bg-animation-' + i, 'assets/level/background-2/bg-animation/bg-animation-' + i + '.png');
+        //texture au fond  TODO élève : faire une boucle pour charger les 3 images et démontrer par la même que vous savez aller au plus simple
+        for(let i=1;i<=10;i++) {
+            this.load.image('push'+i, 'assets/boy3/push/push'+i+'.png');
+        }
+        for(let i=1;i<=7;i++) {
+            this.load.image('fly'+i, 'assets/enemy2/idle/fly'+i+'.png');
+        }
+
+        for(let i=1;i<=10;i++) {
+            this.load.image('id'+i, 'assets/boy4/idle/id'+i+'.png');
         }
     }
 
@@ -89,7 +101,7 @@ class Tableau1 extends Phaser.Scene{
          * Fond très clair avec une trame
          * @type {Phaser.GameObjects.Sprite}
          */
-        let bgAnimationA=this.add.sprite(0,0, 'bg-animation-1').setOrigin(0,0);
+
 
         //--------------background 2 (tout au fond et flou)--------------------
 
@@ -170,8 +182,8 @@ class Tableau1 extends Phaser.Scene{
         this.bg1Container.add(bgstone1);
         bgstone1.setScale(7)
 
-        /// let bgtreee2=this.add.image(900,610, 'bg1-tree-2').setOrigin(0,1);
-        /// bgtreee2.setTintFill
+       /// let bgtreee2=this.add.image(900,610, 'bg1-tree-2').setOrigin(0,1);
+       /// bgtreee2.setTintFill
         ///this.bg1Container.add(bgtree1);
         ///bgtreee2.setScale(0.6)
         ///bgtreee2.flipY=true
@@ -299,7 +311,6 @@ class Tableau1 extends Phaser.Scene{
         z15.setScale(0.5)
 
 
-
         let gfellen1=this.add.image(1400,364, 'gfellen1').setOrigin(0,1);
         gfellen1.setTintFill;
         this.groundContainer.add(gfellen1);
@@ -344,7 +355,7 @@ class Tableau1 extends Phaser.Scene{
          * filtre type film au premier plan
          * @type {Phaser.GameObjects.Sprite}
          */
-        this.filterFilm = this.add.sprite(0, 0, 'filterFilm').setOrigin(0,0);
+        this.filterFilm = this.add.sprite(0, 0, 'filterFilm1').setOrigin(0,0);
         //animation de 3 images
         this.anims.create({
             key: 'film',
@@ -356,54 +367,126 @@ class Tableau1 extends Phaser.Scene{
             frameRate: 16,
             repeat: -1
         });
-        this.filterFilm.play('film')
+        this.filterFilm.play("film")
+
+
+       /// this.bg-animation = this.add.sprite(0, 0, 'bg-animation1').setOrigin(0,0);
+        //animation de 3 images
+        /// this.anims.create({
+        ///    key: 'bg-animation',
+        ///    frames: [
+        ///        {key:'bg-animation-1'},
+        ///        {key:'bg-animation-2'},
+        ///        {key:'bg-animation-3'},
+        /// ],
+        /// frameRate: 16,
+        /// repeat: -1
+        ///});
+        ///this. bg-animation.play("bg-animation")
+
+        this.climb = this.add.sprite(625, 1, 'layer1').setOrigin(0,0);
+        this.anims.create({
+            key: 'layer',
+            frames: [
+                {key:'layer1'},
+                {key:'layer2'},
+                {key:'layer3'},
+                {key:'layer4'},
+                {key:'layer5'},
+                {key:'layer6'},
+                {key:'layer7'},
+            ],
+            frameRate: 16,
+            repeat: -1
+        });
+        this.climb.play("layer")
+        //layer1.setScale(0.3)
+
+
+        this.push = this.add.sprite(325, 1, 'push1').setOrigin(0,0);
+        this.anims.create({
+            key: 'push',
+            frames: [
+                {key:'push1'},
+                {key:'push2'},
+                {key:'push3'},
+                {key:'push4'},
+                {key:'push5'},
+                {key:'push6'},
+                {key:'push7'},
+                {key:'push8'},
+                {key:'push9'},
+                {key:'push10'},
+            ],
+            frameRate: 16,
+            repeat: -1
+        });
+        this.climb.play("push")
+
+        this.idle = this.add.sprite(1225, 1, 'fly1').setOrigin(0,0);
+        this.anims.create({
+            key: 'fly',
+            frames: [
+                {key:'fly1'},
+                {key:'fly2'},
+                {key:'fly3'},
+                {key:'fly4'},
+                {key:'fly5'},
+                {key:'fly6'},
+            ],
+            frameRate: 16,
+            repeat: -1
+        });
+        this.climb.play("fly")
+
+        this.climb = this.add.sprite(625, 1, 'layer1').setOrigin(0,0);
+        this.anims.create({
+            key: 'layer',
+            frames: [
+                {key:'layer1'},
+                {key:'layer2'},
+                {key:'layer3'},
+                {key:'layer4'},
+                {key:'layer5'},
+                {key:'layer6'},
+                {key:'layer7'},
+            ],
+            frameRate: 16,
+            repeat: -1
+        });
+        this.climb.play("layer")
+
+
+        this.idle2 = this.add.sprite(125, 1, 'id1').setOrigin(0,0);
+        this.anims.create({
+            key: 'id',
+            frames: [
+                {key:'id1'},
+                {key:'id2'},
+                {key:'id3'},
+                {key:'id4'},
+                {key:'id5'},
+                {key:'id6'},
+                {key:'id7'},
+                {key:'id8'},
+                {key:'id9' } ,
+                {key:'id10'},
+            ],
+            frameRate: 16,
+            repeat: -1
+        });
+        this.climb.play("id")
+
         ///this.filterbgAnimationA.play('film');
 
         //TODO élève faire une animation du même genre que filter mais pour bgAnimationA
-        //animation de 3 images
 
-        this.anims.create({
-            key: 'bganimation',
-            frames: [
-                {key:'bg-animation-1'},
-                {key:'bg-animation-2'},
-                {key:'bg-animation-3'},
-            ],
-            frameRate: 16,
-            repeat: -1
-        });
-
-        /**
-         * filtre type film au premier plan
-         * @type {Phaser.GameObjects.Sprite}
-         */
-        this.filterBoy = this.add.sprite(0, 0, 'B').setOrigin(0,0);
-        //animation de 3 images
-        this.anims.create({
-            key: 'B',
-            frames: [
-                {key:'B1'},
-                {key:'B2'},
-                {key:'B3'},
-                {key:'B4'},
-                {key:'B5'},
-                {key:'B6'},
-                {key:'B7'},
-                {key:'B8'},
-                {key:'B9'},
-            ],
-            frameRate: 16,
-            repeat: -1
-
-        });
-        this.filterBoy.play('B')
-        //animation de 3 images
         //gestion du parallaxe
         /**
          * Vitesse de déplacement du décor
          * @type {number}
          */
-        this.speed=0; ///CHANGER A 0
+        this.speed=4; ///CHANGER A 0
         //initialise ce qui se passe avec le clavier
         this.initKeyboard();
         // Définit l'espace de déplacement de la caméra
@@ -427,10 +510,10 @@ class Tableau1 extends Phaser.Scene{
             switch (kevent.keyCode)
             {
                 case Phaser.Input.Keyboard.KeyCodes.RIGHT:
-                    me.speed=8;
+                    me.speed=1;
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.LEFT:
-                    me.speed=-8;
+                    me.speed=-1;
                     break;
             }
         });
